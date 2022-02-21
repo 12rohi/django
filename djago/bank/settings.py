@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'bank.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Priyanshisharma$bank',
-        'USER': 'Priyanshisharma',
-        'PASSWORD':'atitute@r28',
-        'HOST':'Priyanshisharma.mysql.pythonanywhere-services.com',
-        
+        'NAME': 'bank',
+        'USER': 'root',
+        'PASSWORD':'',
+        'HOST':'localhost',
+        'PORT':'3307',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
