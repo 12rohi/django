@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Table with database</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Gabriela&display=swap" rel="stylesheet">
+  <style>
+
+    body{
+      background-image: url("{% static 'images/details.jpg' %}");
+      background-position: center;
+      background-size: cover;
+    }
+
+    .btn1{
+      height:40px;
+      width:10%;
+      border:none;
+      outline: none;
+      border-radius: 60px;
+      font-weight: 600;
+      background: rgb(56, 223, 223);
+      color: black;
+      padding-right: 10px;
+  }
+  .btn1:hover{
+      background: rgb(143, 61, 99);
+      transition:0.5s;
+      color: white;
+  }
+
+    #sideNav {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      right: -250px;
+      top: 0;
+      background: #863544;
+      z-index: 2;
+      transition: .5s;
+    }
+
+    nav ul li {
+      list-style: none;
+      margin: 50px 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    #menuBtn {
+      width: 50px;
+      position: fixed;
+      right: 65px;
+      top: 35px;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .blk{
+      width: 14%;
+    }
+
+
+    .card {
+      /* Add shadows to create the "card" effect */
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      text-align: -webkit-center;
+    }
+
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+      box-shadow: 0 26px 16px 0 rgba(87, 12, 156, 0.514);
+    }
+
+    /* Add some padding inside the card container */
+    .container {
+      padding: 20px 16px;
+      margin: 40px;
+      background: pink;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  
+    <div>
+        <h2 style="font-family: 'Gabriela', serif; font-size: 40px; text-align: center; margin: 20px;">Make A Transaction</h2>
+    </div>
+    <div class="card container">
+      <form method="POST">
+        {% csrf_token %}
+        <!-- Make Transcation -->
+
+        <b for="rec" class="blk">To</b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:&nbsp&nbsp
+        <select name="rec" id="reciever" class="blk inp" style="color:black" required>
+        <option class="blk" style="color:black" value="select">Select</option>
+        {% for cust in cust %}
+            <option class="blk" style="color:black" value="{{cust.Email}}">{{cust.Name}}: {{cust.Email}}</option>
+        {% endfor %}
+        </select>
+    
+        <br><br><br>
+        <b for="email" class="blk"> From</b>&nbsp&nbsp&nbsp&nbsp :&nbsp&nbsp 
+        <select name="email" id="sender" class="blk inp" style="color:black" required>
+        <option class="blk" style="color:black" value="select">Select</option>
+        {% for cust in cust  %}
+            <option class="blk" style="color:black" value="{{cust.Email}}">{{cust.Name}}: {{cust.Email}} [Balance: {{cust.Balance}}]</option>
+        {% endfor %}
+        </select>
+        <br><br><br>
+
+
+        <b for="amount" class="blk">Balance :&#8377;</b>
+        <input type="text" name="amount" placeholder="Enter Amount" required>
+        <br><br><br>
+        <button type="submit" class="btn1">SUBMIT</BUTTON>
+      </form>
+    </div>
+    
+    </div>
+
+
+    <nav id="sideNav">
+      <ul>
+        <li><a href="http://127.0.0.1:8000/">HOME</a></li>
+        <li><a href="http://127.0.0.1:8000/customers/">OUR CUSTOMERS</a></li>
+        <li><a href="http://127.0.0.1:8000/history/">TRANSACTION HISTORY</a></li>
+        <li><a href="http://127.0.0.1:8000/details/">TRANSFER MONEY</a></li>
+        <li><a href="http://127.0.0.1:8000/Register/">NEW USER</a></li>
+      </ul>
+    </nav>
+    <div id="hojaplz">
+      <img src="{% static 'images/menu.png' %}" id="menuBtn">
+    </div>
+
+
+
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script>
+      let menuBtn = document.querySelector('#hojaplz');
+      let sideNav = document.querySelector('#sideNav')
+
+      let condition = true;
+
+      menuBtn.addEventListener('click', function() {
+        if (condition) {
+          sideNav.style.right = '0px';
+          condition = false;
+        } else {
+          sideNav.style.right = '-250px';
+          condition = true;
+        }
+      })
+
+
+      $(function() {
+        setTimeout(function() {
+          $('.messagehide').fadeOut('slow');
+        }, 3000);
+      });
+    </script>

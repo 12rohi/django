@@ -1,0 +1,191 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+    <title>Create user!</title>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Gabriela&display=swap" rel="stylesheet">
+    <style>
+       *{   
+            box-sizing:border-box ;
+        }
+        .row{
+            background: pink;
+            border-radius: 30px;
+            box-shadow: 12px 12px 12px;
+            background-image: url("{% static 'images/register1.jpg' %}");
+            background-position: center;
+            background-size: cover;
+        }
+        .login img{
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px;
+            
+        }
+        .login h1{
+            font-size: 3rem;
+            font-weight: 400;
+            font-family: 'Anton', sans-serif;
+            font-family: 'Gabriela', serif;
+        }
+        .inp{
+            height:50px;
+            width: 70%;
+            border: none;
+            outline: none;
+            border-radius:60px;
+            -webkit-box-shadow: -1px 1px 30px -11px rgb(248, 248, 248);
+            -moz-box-shadow: -1px 1px 30px -11px rgb(255, 255, 255);
+            box-shadow: -1px 1px 30px -11px rgb(192, 109, 157);
+        }
+        .btn1{
+            height:50px;
+            width:50%;
+            border:none;
+            outline: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 20px;
+            background: red;
+            color: white;
+            transition: ease-out 0.3s;
+        }
+        .btn1:hover{
+            background: yellow;
+            box-shadow: inset 100px 0 0 0 yellow;
+            transition:0.5s;
+            color: black;
+        }
+        
+
+        #sideNav{
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            right: -250px;
+            top:0;
+            background: #33FF6E;
+            z-index: 2;
+            transition: .5s;
+        }
+        nav ul li{
+            list-style: none;
+            margin: 50px 20px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: #333FFF;
+        }
+        #menuBtn{
+            width: 50px;
+            position: fixed;
+            right: 65px;
+            top: 35px;
+            z-index: 2;
+            cursor: pointer;
+        }
+ </style>
+  </head>
+  <body>
+    <section class="login py-5 bg-light">
+        <img src="{% static 'images/menu.png' %}" id="menuBtn">
+            <div class="container pt-3">
+                <div class="row g-0 pt-5">
+                    <div class=" ps-5 pt-5 mt-5 col-lg-5 ">
+                        <img src="{% static 'images/customers1.jpg' %}" class="img-fluid">
+                    </div>
+                    <div class="col-lg-7 text-center py5">
+                        <h1 style="color: white;">Create New User</h1>
+                        <form action="{% url 'Register' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-row py-3 pt-5">
+                                <div class="offset-1 col-lg-10">
+                                    <input type="text" name="Name" class="inp px-3" placeholder="Username" required>
+                                </div>
+                            </div>
+                            <div class="form-row pt-4">
+                                <div class="offset-1 col-lg-10">
+                                    <input name="Email" type="text" class="inp px-3" placeholder="Email" required>
+                                </div>
+                            </div>
+                            <div class="form-row pt-5 ">
+                                <div  class="  offset-1 col-lg-10">
+                                    <select  name="Gender" class="inp px-3 form-selec " aria-label="Default select example" required>
+                                        <option selected>Select Gender</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row pt-5 ">
+                                <div class="offset-1 col-lg-10">
+                                    <input id="balance" name="Balance" type="text" class="inp px-3" placeholder="Balance" required>
+                                </div>
+                            </div>
+                            <div class="form-row pt-5 pb-5">
+                                <div class="offset-1 col-lg-10">
+                                    <button type="submit" class="btn1">SUBMIT</BUTTON>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+                        
+
+
+        </section>
+        <nav id="sideNav">
+            <ul>
+                <li><a href="http://127.0.0.1:8000/">HOME</a></li>
+                <li><a href="http://127.0.0.1:8000/customers/">OUR CUSTOMERS</a></li>
+                <li><a href="http://127.0.0.1:8000/history/">TRANSACTION HISTORY</a></li>
+                <li><a href="http://127.0.0.1:8000/details/">TRANSFER MONEY</a></li>
+                <li><a href="http://127.0.0.1:8000/Register/">NEW USER</a></li>
+            </ul>
+        </nav>
+        <div id="hojaplz">
+          <img src="{% static 'images/menu.png' %}" id="menuBtn">
+        </div>
+
+        <script>
+           let menuBtn = document.querySelector('#hojaplz');
+            let sideNav = document.querySelector('#sideNav')
+            let errorClose = document.querySelector('.errorClose')
+            let hide= document.querySelector('.hide')
+            let balance= document.querySelector('balance')
+        
+            let condition = true;
+
+           menuBtn.addEventListener('click',function(){
+               if(condition){
+                   sideNav.style.right = '0px';
+                   condition = false;
+               }else{
+                sideNav.style.right = '-250px';
+                condition = true;
+               }
+
+           })
+
+           errorClose.addEventListener('click',function(){
+             hide.style.display='none'
+           })
+           
+        </script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>
